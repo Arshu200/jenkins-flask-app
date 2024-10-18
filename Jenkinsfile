@@ -44,7 +44,8 @@ pipeline {
         }
         stage('Deploy to EKS Cluster') {
             steps {
-                sh "kubectl apply -f deployment.yaml"
+                sh " aws eks update-kubeconfig --region us-east-1 --name CastAI-POC-EKS-Cluster"
+                sh "kubectl apply -f deployment.yaml -n jenkins"
                 echo "Deployed to EKS Cluster"
             }
         }

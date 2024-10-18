@@ -5,7 +5,7 @@ pipeline {
 
     tools {
         // dockerTool 'docker'
-        kubectl 'kubectl'
+        tool name: 'kubectl', type: 'Kubernetes CLI'
         docker 'docker'
     }
     environment {

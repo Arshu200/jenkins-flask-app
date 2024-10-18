@@ -11,7 +11,7 @@ pipeline {
         IMAGE_TAG = "${IMAGE_NAME}:${env.BUILD_NUMBER}"
         // KUBECONFIG = credentials('kubeconfig-credentials-id')
         AWS_ACCESS_KEY_ID = credentials('aws-access-key')
-        AWS_SECRET_KEY_ID = credentials('aws-secret-key')
+        AWS_SECRET_ACCESS_KEY_ID = credentials('aws-secret-key')
         
     }
     stages {

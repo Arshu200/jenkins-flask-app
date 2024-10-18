@@ -10,6 +10,9 @@ pipeline {
         IMAGE_NAME = 'cloud1111/jenkins-flask-app-demo'
         IMAGE_TAG = "${IMAGE_NAME}:${env.BUILD_NUMBER}"
         // KUBECONFIG = credentials('kubeconfig-credentials-id')
+        AWS_ACCESS_KEY_ID = credentials('aws-access-key')
+        AWS_SECRET_KEY_ID = credentials('aws-secret-key')
+        
     }
     stages {
         stage('Test') {

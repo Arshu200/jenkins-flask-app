@@ -5,6 +5,7 @@ pipeline {
 
     tools {
         dockerTool 'docker'
+        kubectl 'kubectl'
     }
     environment {
         IMAGE_NAME = 'cloud1111/jenkins-flask-app-demo'

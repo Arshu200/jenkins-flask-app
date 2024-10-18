@@ -9,9 +9,9 @@ pipeline {
     environment {
         IMAGE_NAME = 'cloud1111/jenkins-flask-app-demo'
         IMAGE_TAG = "${IMAGE_NAME}:${env.BUILD_NUMBER}"
+        AWS_REGION = 'us-east-1'
         // KUBECONFIG = credentials('kubeconfig-credentials-id')
-        AWS_ACCESS_KEY_ID = credentials('aws-access-key')
-        AWS_SECRET_ACCESS_KEY_ID = credentials('aws-secret-key')
+        
         
     }
     stages {
@@ -47,8 +47,7 @@ pipeline {
         }
         stage('Deploy to EKS Cluster') {
             steps {
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', 
-                                  credentialsId: 'aws-cred']]){
+                withCredentials([aws(credentialsId: 'aws-cred', region: AWS_REGION)]) {
                 sh " aws eks update-kubeconfig --region us-east-1 --name CastAI-POC-EKS-Cluster"
                 sh "kubectl apply -f deployment.yaml -n jenkins"
                 }

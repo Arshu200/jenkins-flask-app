@@ -10,6 +10,7 @@ pipeline {
         IMAGE_NAME = 'cloud1111/jenkins-flask-app-demo'
         IMAGE_TAG = "${IMAGE_NAME}:${env.BUILD_NUMBER}"
         AWS_REGION = 'us-east-1'
+        KUBECONFIG = /root/.kube/config
         // KUBECONFIG = credentials('kubeconfig-credentials-id')
         
         
@@ -19,6 +20,7 @@ pipeline {
             steps {
                 echo "Test Stage"
                 sh "whoami"
+                sh "ls -al ~/.kube/config"
             }
         }
         stage('Login to docker hub') {

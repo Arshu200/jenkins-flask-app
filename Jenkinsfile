@@ -10,7 +10,8 @@ pipeline {
         IMAGE_NAME = 'cloud1111/jenkins-flask-app-demo'
         IMAGE_TAG = "${IMAGE_NAME}:${env.BUILD_NUMBER}"
         AWS_REGION = 'us-east-1'
-        KUBECONFIG = "/home/ubuntu/.kube/config"
+        // KUBECONFIG = "/home/ubuntu/.kube/config"
+        KUBECTL = "/home/ubuntu/bin/kubectl"
         // KUBECONFIG = credentials('kubeconfig-credentials-id')
         
         

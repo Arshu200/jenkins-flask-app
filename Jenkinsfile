@@ -56,6 +56,7 @@ pipeline {
                 sh "sed -i 's#TAG#${BUILD_NUMBER}#g' deployment.yaml"
                 sh " aws eks update-kubeconfig --region us-east-1 --name CastAI-POC-EKS-Cluster"
                 sh "/home/ubuntu/bin/kubectl apply -f deployment.yaml -n jenkins"
+                sh "/home/ubuntu/bin/kubectl apply -f service.yaml -n jenkins"
                 }
                 echo "Deployed to EKS Cluster"
             }

@@ -51,6 +51,7 @@ pipeline {
         stage('Deploy to EKS Cluster') {
             steps {
                 withCredentials([aws(credentialsId: 'aws-cred', region: AWS_REGION)]) {
+                sh "sed -i 's/TAG/${IMAGE_TAG}/g' deployment.yaml"
                 sh " aws eks update-kubeconfig --region us-east-1 --name CastAI-POC-EKS-Cluster"
                 sh "/home/ubuntu/bin/kubectl apply -f deployment.yaml -n jenkins"
                 }

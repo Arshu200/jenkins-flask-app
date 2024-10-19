@@ -7,7 +7,7 @@ pipeline {
         dockerTool 'docker' 
     }
     environment {
-        IMAGE_NAME = 'cloud1111/jenkins-flask-app-demo:${BUILD_NUMBER}'
+        IMAGE_NAME = "cloud1111/jenkins-flask-app-demo:${BUILD_NUMBER}"
         // IMAGE_TAG = "${IMAGE_NAME}:${env.BUILD_NUMBER}"
         // IMAGE_TAG = "${IMAGE_NAME}:${BUILD_NUMBER}"
         AWS_REGION = 'us-east-1'

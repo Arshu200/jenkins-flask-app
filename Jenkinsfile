@@ -52,7 +52,7 @@ pipeline {
             steps {
                 withCredentials([aws(credentialsId: 'aws-cred', region: AWS_REGION)]) {
                 sh " aws eks update-kubeconfig --region us-east-1 --name CastAI-POC-EKS-Cluster"
-                sh "kubectl apply -f deployment.yaml -n jenkins"
+                sh "/home/ubuntu/bin/kubectl apply -f deployment.yaml -n jenkins"
                 }
                 echo "Deployed to EKS Cluster"
             }

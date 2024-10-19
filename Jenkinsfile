@@ -7,9 +7,9 @@ pipeline {
         dockerTool 'docker' 
     }
     environment {
-        IMAGE_NAME = 'cloud1111/jenkins-flask-app-demo'
+        IMAGE_NAME = 'cloud1111/jenkins-flask-app-demo:${BUILD_NUMBER}'
         // IMAGE_TAG = "${IMAGE_NAME}:${env.BUILD_NUMBER}"
-        IMAGE_TAG = "${IMAGE_NAME}:${BUILD_NUMBER}"
+        // IMAGE_TAG = "${IMAGE_NAME}:${BUILD_NUMBER}"
         AWS_REGION = 'us-east-1'
         // KUBECONFIG = "/home/ubuntu/.kube/config"
         // KUBECTL = "/home/ubuntu/bin/kubectl*"
@@ -36,7 +36,7 @@ pipeline {
         {
             steps
             {
-                sh 'sudo docker build -t ${IMAGE_TAG} .'
+                sh 'sudo docker build -t ${IMAGE_NAME} .'
                 echo "Docker image build successfully"
                 sh "sudo docker images"
             }
@@ -45,7 +45,7 @@ pipeline {
         {
             steps
             {
-                sh 'sudo docker push ${IMAGE_TAG}'
+                sh 'sudo docker push ${IMAGE_NAME}'
                 echo "Docker image push successfully"
             }
         }
@@ -53,7 +53,7 @@ pipeline {
             steps {
                 withCredentials([aws(credentialsId: 'aws-cred', region: AWS_REGION)]) {
                 // sh "sed -i 's#TAG/${IMAGE_TAG}#g' deployment.yaml"
-                sh "sed -i 's#TAG#${IMAGE_TAG}#g' deployment.yaml"
+                sh "sed -i 's#TAG#${BUILD_NUMBER}#g' deployment.yaml"
                 sh " aws eks update-kubeconfig --region us-east-1 --name CastAI-POC-EKS-Cluster"
                 sh "/home/ubuntu/bin/kubectl apply -f deployment.yaml -n jenkins"
                 }

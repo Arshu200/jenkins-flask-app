@@ -1,8 +1,7 @@
 pipeline {
-    // agent {
-    //     node {label "UAT"}
-    // }
-    agent any
+    agent {
+        node {label "UAT"}
+    }
     
     tools {
         dockerTool 'docker' 

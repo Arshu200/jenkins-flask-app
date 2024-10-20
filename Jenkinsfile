@@ -2,9 +2,11 @@ pipeline {
     agent {
         node {label "UAT"}
     }
+    
     tools {
         dockerTool 'docker' 
     }
+    
     environment {
         IMAGE_NAME = "cloud1111/jenkins-flask-app-demo:${BUILD_NUMBER}"
         AWS_REGION = 'us-east-1'

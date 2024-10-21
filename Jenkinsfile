@@ -4,7 +4,7 @@ pipeline {
         dockerTool 'docker'
     }
     environment {
-        IMAGE_NAME = 'cloud1111/jenkins-flask-app-demo'
+        IMAGE_NAME = 'arshad200/jenkins-flask-app-demo'
         IMAGE_TAG = "${IMAGE_NAME}:${env.BUILD_NUMBER}"
     }
     stages {
@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Login to docker hub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+                withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
                 sh 'sudo docker login -u ${USERNAME} -p ${PASSWORD}'}
                 echo 'Login successfully'
             }

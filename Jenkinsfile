@@ -1,11 +1,12 @@
 pipeline {
-    agent {
-        node {label "UAT"}
-    }
+    // agent {
+    //     node {label "UAT"}
+    // }
     
-    tools {
-        dockerTool 'docker' 
-    }
+    // tools {
+    //     dockerTool 'docker' 
+    // }
+    agent any
     
     environment {
         IMAGE_NAME = "arshad200/jenkins-flask-app-demo:${BUILD_NUMBER}"

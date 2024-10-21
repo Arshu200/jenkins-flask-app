@@ -8,7 +8,7 @@ pipeline {
     }
     
     environment {
-        IMAGE_NAME = "cloud1111/jenkins-flask-app-demo:${BUILD_NUMBER}"
+        IMAGE_NAME = "arshad200/jenkins-flask-app-demo:${BUILD_NUMBER}"
         AWS_REGION = 'us-east-1'
     }
     
@@ -22,7 +22,7 @@ pipeline {
         }
         stage('Login to docker hub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+                withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
                 sh 'sudo docker login -u ${USERNAME} -p ${PASSWORD}'}
                 echo 'Login successfully'
             }
